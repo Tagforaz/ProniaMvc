@@ -1,0 +1,31 @@
+C:\Users\Tagforaz\Desktop\Pb306\Pronia MVC\Pronia MVC\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\Tagforaz\Desktop\Pb306\Pronia MVC\Pronia MVC\bin\Debug\net8.0\appsettings.json
+C:\Users\Tagforaz\Desktop\Pb306\Pronia MVC\Pronia MVC\bin\Debug\net8.0\Pronia MVC.staticwebassets.endpoints.json
+C:\Users\Tagforaz\Desktop\Pb306\Pronia MVC\Pronia MVC\bin\Debug\net8.0\Pronia MVC.exe
+C:\Users\Tagforaz\Desktop\Pb306\Pronia MVC\Pronia MVC\bin\Debug\net8.0\Pronia MVC.deps.json
+C:\Users\Tagforaz\Desktop\Pb306\Pronia MVC\Pronia MVC\bin\Debug\net8.0\Pronia MVC.runtimeconfig.json
+C:\Users\Tagforaz\Desktop\Pb306\Pronia MVC\Pronia MVC\bin\Debug\net8.0\Pronia MVC.dll
+C:\Users\Tagforaz\Desktop\Pb306\Pronia MVC\Pronia MVC\bin\Debug\net8.0\Pronia MVC.pdb
+C:\Users\Tagforaz\Desktop\Pb306\Pronia MVC\Pronia MVC\obj\Debug\net8.0\rpswa.dswa.cache.json
+C:\Users\Tagforaz\Desktop\Pb306\Pronia MVC\Pronia MVC\obj\Debug\net8.0\Pronia MVC.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Tagforaz\Desktop\Pb306\Pronia MVC\Pronia MVC\obj\Debug\net8.0\Pronia MVC.AssemblyInfoInputs.cache
+C:\Users\Tagforaz\Desktop\Pb306\Pronia MVC\Pronia MVC\obj\Debug\net8.0\Pronia MVC.AssemblyInfo.cs
+C:\Users\Tagforaz\Desktop\Pb306\Pronia MVC\Pronia MVC\obj\Debug\net8.0\Pronia MVC.csproj.CoreCompileInputs.cache
+C:\Users\Tagforaz\Desktop\Pb306\Pronia MVC\Pronia MVC\obj\Debug\net8.0\Pronia MVC.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Tagforaz\Desktop\Pb306\Pronia MVC\Pronia MVC\obj\Debug\net8.0\Pronia MVC.RazorAssemblyInfo.cache
+C:\Users\Tagforaz\Desktop\Pb306\Pronia MVC\Pronia MVC\obj\Debug\net8.0\Pronia MVC.RazorAssemblyInfo.cs
+C:\Users\Tagforaz\Desktop\Pb306\Pronia MVC\Pronia MVC\obj\Debug\net8.0\rjimswa.dswa.cache.json
+C:\Users\Tagforaz\Desktop\Pb306\Pronia MVC\Pronia MVC\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
+C:\Users\Tagforaz\Desktop\Pb306\Pronia MVC\Pronia MVC\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
+C:\Users\Tagforaz\Desktop\Pb306\Pronia MVC\Pronia MVC\obj\Debug\net8.0\scopedcss\bundle\Pronia MVC.styles.css
+C:\Users\Tagforaz\Desktop\Pb306\Pronia MVC\Pronia MVC\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\Tagforaz\Desktop\Pb306\Pronia MVC\Pronia MVC\obj\Debug\net8.0\staticwebassets.build.json.cache
+C:\Users\Tagforaz\Desktop\Pb306\Pronia MVC\Pronia MVC\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\Tagforaz\Desktop\Pb306\Pronia MVC\Pronia MVC\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\Tagforaz\Desktop\Pb306\Pronia MVC\Pronia MVC\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+C:\Users\Tagforaz\Desktop\Pb306\Pronia MVC\Pronia MVC\obj\Debug\net8.0\Pronia MVC.dll
+C:\Users\Tagforaz\Desktop\Pb306\Pronia MVC\Pronia MVC\obj\Debug\net8.0\refint\Pronia MVC.dll
+C:\Users\Tagforaz\Desktop\Pb306\Pronia MVC\Pronia MVC\obj\Debug\net8.0\Pronia MVC.pdb
+C:\Users\Tagforaz\Desktop\Pb306\Pronia MVC\Pronia MVC\obj\Debug\net8.0\Pronia MVC.genruntimeconfig.cache
+C:\Users\Tagforaz\Desktop\Pb306\Pronia MVC\Pronia MVC\obj\Debug\net8.0\ref\Pronia MVC.dll
+C:\Users\Tagforaz\Desktop\Pb306\Pronia MVC\Pronia MVC\bin\Debug\net8.0\Pronia MVC.staticwebassets.runtime.json
