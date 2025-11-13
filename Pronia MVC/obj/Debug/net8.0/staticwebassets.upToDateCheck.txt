@@ -158,6 +158,7 @@ wwwroot\assets\images\website-images\3.png
 wwwroot\assets\images\website-images\car.png
 wwwroot\assets\images\website-images\card.png
 wwwroot\assets\images\website-images\dark.png
+wwwroot\assets\images\website-images\flower.jpg
 wwwroot\assets\images\website-images\quotation.png
 wwwroot\assets\images\website-images\service.png
 wwwroot\assets\js\main.js
