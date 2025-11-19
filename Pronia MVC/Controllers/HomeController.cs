@@ -20,12 +20,20 @@ namespace Pronia_MVC.Controllers
             //using AppDbContext context = new AppDbContext();
             //_context.Slides.ToList();
 
-            List<Slide> slides = _context.Slides.OrderBy(s => s.Order).Take(2).ToList();
-            List<Product> products = _context.Products.OrderBy(p=>p.CreatedAt).Take(8).Include(p=>p.ProductImages).ToList();
+           
+
             HomeVm homeVm = new HomeVm
             {
-                Slides = slides,
-                Products = products,
+                Slides = _context.Slides
+                .OrderBy(s => s.Order)
+                .Take(2)
+                .ToList(),
+
+                Products = _context.Products
+                .OrderBy(p => p.CreatedAt)
+                .Take(8)
+                .Include(p => p.ProductImages.Where(pi => pi.IsPrimary != null))
+                .ToList()
                 
             };
             return View(homeVm);
