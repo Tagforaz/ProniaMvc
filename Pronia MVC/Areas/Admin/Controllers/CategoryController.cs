@@ -13,11 +13,13 @@ namespace Pronia_MVC.Areas.Admin.Controllers
         public CategoryController(AppDbContext context)
         {
             _context = context;
+            
         }
         public  async Task<IActionResult> Index()
         {
-            List<Category> categories = await _context.Categories.ToListAsync();
+            List<Category> categories = await _context.Categories.Include(c=>c.Products).ToListAsync();
             return View(categories);
+            
         }
     }
 }
