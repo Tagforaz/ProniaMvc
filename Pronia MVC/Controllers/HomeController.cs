@@ -15,7 +15,7 @@ namespace Pronia_MVC.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult>  Index()
         {
             //using AppDbContext context = new AppDbContext();
             //_context.Slides.ToList();
@@ -24,16 +24,16 @@ namespace Pronia_MVC.Controllers
 
             HomeVm homeVm = new HomeVm
             {
-                Slides = _context.Slides
+                Slides = await _context.Slides
                 .OrderBy(s => s.Order)
                 .Take(2)
-                .ToList(),
+                .ToListAsync(),
 
-                Products = _context.Products
+                Products = await _context.Products
                 .OrderBy(p => p.CreatedAt)
                 .Take(8)
                 .Include(p => p.ProductImages.Where(pi => pi.IsPrimary != null))
-                .ToList()
+                .ToListAsync()
                 
             };
             return View(homeVm);

@@ -452,7 +452,7 @@
     <div class="product-area section-space-y-axis-90">
         <div class="container">
             <div class="row">
-                <div class="section-title-wrap without-tab">
+                <div class="section-title-wrap without-tab"> 
                     <h2 class="section-title">Related Products</h2>
                     <p class="section-desc">
                         Contrary to popular belief, Lorem Ipsum is not simply random
@@ -519,7 +519,7 @@
                                     </div>
                                     <div class="product-content">
                                         <a class="product-name"
-                                           href="single-product-variable.html">@product.Name</a>
+                                           asp-controller="shop" asp-action="details" asp-route-id="@product.Id">@product.Name</a>
                                         <div class="price-box pb-1">
                                             <span class="new-price">$@product.Price</span>
                                         </div>
