@@ -64,12 +64,14 @@ namespace Pronia_MVC.Areas.Admin.Controllers
             {
                 return View();
             }
-            bool result = await _context.Slides.AnyAsync(s=>s.Order == slide.Order);
+            bool result = await _context.Slides.AnyAsync(s=>s.Order == slide.Order && s.Id!=id);
             if(result)
             {
                 ModelState.AddModelError(nameof(Slide.Order), $"{slide.Order} order already exist");
                 return View();
             }
+            _context.Slides.Update(slide);
+            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 

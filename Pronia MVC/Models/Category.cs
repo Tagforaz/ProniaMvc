@@ -4,6 +4,6 @@
     {
         public string Name { get; set; }
         //relational
-        public List<Product> Products { get; set; }
+        public List<Product>? Products { get; set; }
     }
 }

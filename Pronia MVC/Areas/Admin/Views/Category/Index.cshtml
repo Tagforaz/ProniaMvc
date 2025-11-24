@@ -11,7 +11,7 @@
                     
                 </p>
                 <div class="table-responsive">
-                    <a class="btn btn-success">Create Category</a>
+                    <a class="btn btn-success" asp-action="Create">Create Category</a>
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -47,7 +47,7 @@
                                     </td>
                                     <td>
                                         <a class="btn btn-danger"><i class="mdi mdi-delete"></i></a>
-                                        <a class="btn btn-warning"><i class="mdi mdi-grease-pencil"></i></a>
+                                        <a asp-action="update" asp-route-id="@category.Id" class="btn btn-warning"><i class="mdi mdi-grease-pencil"></i></a>
                                         <a class="btn btn-primary"><i class="mdi mdi-account-card-details"></i></a>
                                     </td>
                                 </tr>
