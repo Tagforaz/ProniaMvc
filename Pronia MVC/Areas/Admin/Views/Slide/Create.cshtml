@@ -8,7 +8,7 @@
                 <p class="card-description">
                     Basic form elements
                 </p>
-                <form class="forms-sample" method="post">
+                <form class="forms-sample" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label asp-for="Title">Title</label>
                         <input asp-for="Title" class="form-control" placeholder="Title">
@@ -25,9 +25,9 @@
                         <span asp-validation-for="Order" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Image">Image</label>
-                        <input asp-for="Image" class="form-control" placeholder="Image">
-                        <span asp-validation-for="Image" class="text-danger"></span>
+                        <label asp-for="Photo">Image</label>
+                        <input asp-for="Photo" class="form-control" placeholder="Photo">
+                        <span asp-validation-for="Photo" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Description">Description</label>
