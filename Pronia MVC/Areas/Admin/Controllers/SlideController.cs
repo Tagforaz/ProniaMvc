@@ -23,8 +23,15 @@ namespace Pronia_MVC.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            List<Slide> slides = await _context.Slides.AsNoTracking().ToListAsync();
-            return View(slides);
+            List<GetSlideVM> slideVMs= await _context.Slides.AsNoTracking()
+                .Select(s=>new GetSlideVM
+                {
+                 Id = s.Id,
+                 Title = s.Title,
+                 Image = s.Image,
+                 Order = s.Order
+                }).ToListAsync();
+            return View(slideVMs);
         }
         public IActionResult Create()
         {

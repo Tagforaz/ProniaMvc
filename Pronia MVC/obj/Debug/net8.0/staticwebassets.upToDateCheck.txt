@@ -237,10 +237,6 @@ wwwroot\assets\images\website-images\2-2-70x78.png
 wwwroot\assets\images\website-images\2-3-70x78.png
 wwwroot\assets\images\website-images\2.png
 wwwroot\assets\images\website-images\3.png
-wwwroot\assets\images\website-images\3b7b8910-1585-4b8d-bb86-306b9197e6a3.JPEG
-wwwroot\assets\images\website-images\841770c5-1887-4e46-8451-4c82715585b89.JPEG
-wwwroot\assets\images\website-images\9.JPEG
-wwwroot\assets\images\website-images\c08e53e9-1721-474c-88f8-5f5d8edb4568.JPEG
 wwwroot\assets\images\website-images\car.png
 wwwroot\assets\images\website-images\card.png
 wwwroot\assets\images\website-images\dark.png
