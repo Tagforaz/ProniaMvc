@@ -33,7 +33,8 @@ namespace Pronia_MVC.Areas.Admin.Controllers
         {
             CreateProductVM productVM = new()
             {
-                Categories = await _context.Categories.ToListAsync()
+                Categories = await _context.Categories.ToListAsync(),
+                Tags = await _context.Tags.ToListAsync(),
             };
             return View(productVM);
         }
@@ -41,6 +42,7 @@ namespace Pronia_MVC.Areas.Admin.Controllers
         public async Task<IActionResult> Create(CreateProductVM productVM)
         {
             productVM.Categories= await _context.Categories.ToListAsync();
+            productVM.Tags = await _context.Tags.ToListAsync();
             if (!ModelState.IsValid)
             {
 
@@ -52,6 +54,20 @@ namespace Pronia_MVC.Areas.Admin.Controllers
                 ModelState.AddModelError(nameof(CreateProductVM.CategoryId), "Category does not exists(Men yazmisam)");
                 return View(productVM);
             }
+          if(productVM.TagIds is not  null)
+            {
+                productVM.TagIds = new();
+            }
+          productVM.TagIds=productVM.TagIds.Distinct().ToList();
+                bool tagResult = productVM.TagIds.Any(tId => !productVM.Tags.Exists(t => t.Id == tId));
+                if (tagResult)
+                {
+                    ModelState.AddModelError(nameof(CreateProductVM.TagIds), "Tags are wrong");
+                    return View(productVM);
+                }
+            
+         
+           
             bool resultName = await _context.Products.AnyAsync(p=>p.Name==productVM.Name);
             if (resultName)
             {
@@ -65,8 +81,19 @@ namespace Pronia_MVC.Areas.Admin.Controllers
                 Price=productVM.Price.Value,
                 Description=productVM.Description,
                 CategoryId=productVM.CategoryId.Value,
-                CreatedAt = DateTime.Now
+                CreatedAt = DateTime.Now,
+                ProductTags=productVM.TagIds.Select(tId=>new ProductTag { TagId=tId }).ToList()
             };
+
+            //foreach (var tId  in productVM.TagIds)
+            //{
+            //    product.ProductTags.Add(new ProductTag
+            //    {
+            //        TagId = tId
+
+            //    });
+            //}
+            
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
@@ -77,7 +104,9 @@ namespace Pronia_MVC.Areas.Admin.Controllers
             {
                 return BadRequest();
             }
-            Product? existed = await _context.Products.FirstOrDefaultAsync(p => p.Id==id); 
+            Product? existed = await _context.Products
+                .Include(p=>p.ProductTags)
+                .FirstOrDefaultAsync(p => p.Id==id); 
             if(existed is null)
             {
                 return NotFound();
@@ -89,7 +118,9 @@ namespace Pronia_MVC.Areas.Admin.Controllers
                 Description=existed.Description,
                 CategoryId=existed.CategoryId,
                 Price=existed.Price,
-                Categories = await _context.Categories.ToListAsync()
+                TagIds=existed.ProductTags.Select(pt=>pt.TagId).ToList(),
+                Categories = await _context.Categories.ToListAsync(),
+                Tags=await _context.Tags.ToListAsync()
             };
             return View(productVM);
         }
@@ -97,6 +128,7 @@ namespace Pronia_MVC.Areas.Admin.Controllers
         public async Task<IActionResult> Update(int? id,UpdateProductVM productVM)
         {
             productVM.Categories= await _context.Categories.ToListAsync();
+            productVM.Tags = await _context.Tags.ToListAsync();
             if (!ModelState.IsValid)
             {
                 return View(productVM);
@@ -107,13 +139,35 @@ namespace Pronia_MVC.Areas.Admin.Controllers
                 ModelState.AddModelError(nameof(UpdateProductVM.CategoryId), "Category does not exists(Men yazmisam)");
                 return View(productVM);
             }
+            if (productVM.TagIds is not null)
+            {
+                productVM.TagIds = new();
+            }
+            productVM.TagIds = productVM.TagIds.Distinct().ToList();
+            bool tagResult = productVM.TagIds.Any(tId => !productVM.Tags.Exists(t => t.Id == tId));
+            if (tagResult)
+            {
+                ModelState.AddModelError(nameof(CreateProductVM.TagIds), "Tags are wrong");
+                return View(productVM);
+            }
             bool resultName = await _context.Products.AnyAsync(p => p.Name == productVM.Name&& p.Id!=id);
             if (resultName)
             {
                 ModelState.AddModelError(nameof(UpdateProductVM.Name), "Product name already exists");
                 return View(productVM);
             }
-            Product? existed = await _context.Products.FirstOrDefaultAsync(p=> p.Id==id);
+            Product? existed = await _context.Products.Include(p=>p.ProductTags).FirstOrDefaultAsync(p=> p.Id==id);
+
+        
+            _context.ProductTags.RemoveRange(existed.ProductTags
+                .Where(pt => productVM.TagIds
+                .Exists(tId => pt.TagId == tId))
+                .ToList());
+            _context.ProductTags.AddRange(productVM.TagIds
+                .Where(tId => !existed.ProductTags
+                .Exists(pt => pt.TagId == tId))
+                .Select(tId => new ProductTag { TagId = tId,ProductId=existed.Id })
+                .ToList());
             existed.Name = productVM.Name;
             existed.Sku = productVM.Sku;
             existed.Description = productVM.Description;
