@@ -170,9 +170,27 @@
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">
+                        <a class="nav-link" asp-controller="home" asp-action="index">
                             <i class="mdi mdi-home menu-icon"></i>
-                            <span class="menu-title">Dashboard</span>
+                            <span class="menu-title">Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="product" asp-action="index">
+                            <i class="mdi mdi-home menu-icon"></i>
+                            <span class="menu-title">Product</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Category" asp-action="index">
+                            <i class="mdi mdi-home menu-icon"></i>
+                            <span class="menu-title">Category</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Slide" asp-action="index">
+                            <i class="mdi mdi-home menu-icon"></i>
+                            <span class="menu-title">Slide</span>
                         </a>
                     </li>
                     <li class="nav-item">
