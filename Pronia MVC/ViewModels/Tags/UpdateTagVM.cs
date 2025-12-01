@@ -1,4 +1,4 @@
-﻿using Pronia_MVC.Models;
+﻿
 
 namespace Pronia_MVC.ViewModels
 {

@@ -6,5 +6,6 @@ namespace Pronia_MVC.ViewModels
     {
         public int Id { get; set; } 
         public string Name { get; set; }
+      
     }
 }
