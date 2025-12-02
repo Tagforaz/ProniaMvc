@@ -168,6 +168,29 @@ namespace Pronia_MVC.Areas.Admin.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id is null || id < 1)
+            {
+                return BadRequest();
+            }
+            Slide existedSlide = await _context.Slides.FirstOrDefaultAsync(s => s.Id == id);
+            if (existedSlide is null)
+            {
+                return NotFound();
+            }
+            DetailsSlideVM slideVM = new()
+            {
+                Title=existedSlide.Title,
+                SubTitle=existedSlide.SubTitle,
+                Order=existedSlide.Order,
+                Description=existedSlide.Description,
+                Image=existedSlide.Image
+             
+
+            };
+            return View(slideVM);
+        }
     }
 
 }

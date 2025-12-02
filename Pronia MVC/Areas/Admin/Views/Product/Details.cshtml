@@ -1,0 +1,84 @@
+﻿@model DetailsProductVM
+@{
+    ProductImage primary = Model.ProductImages.FirstOrDefault(pi => pi.IsPrimary == true);
+    ProductImage secondary = Model.ProductImages.FirstOrDefault(pi => pi.IsPrimary == false);
+}
+
+
+<div class="row">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Details Product</h4>
+
+                <form class="forms-sample" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <img style="width:150px;height:150px;" src="~/assets/images/website-images/@primary.Image" />
+             
+                    </div>
+                    <div class="form-group">
+                        <img style="width:150px;height:150px;" src="~/assets/images/website-images/@secondary.Image" />
+                    
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Name">Name</label>
+                        <input asp-for="Name" disabled class="form-control" placeholder="Name">
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Price">Price</label>
+                        <input asp-for="Price" disabled class="form-control" placeholder="Price">
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Sku">Sku</label>
+                        <input asp-for="Sku" disabled class="form-control" placeholder="Sku">
+                        <span asp-validation-for="Sku" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CategoryId">Category</label>
+                        <select asp-for="CategoryId" disabled class="form-control" asp-items="@(new SelectList(Model.Categories, nameof(Category.Id), nameof(Category.Name)))">
+                        </select>
+                        @*            <select asp-for="CategoryId" class="form-control">
+                            <option selected disabled value="">Choose Category</option>
+                            @foreach (Category category in Model.Categories)
+                            {
+                                <option value="@category.Id">@category.Name</option>
+                            }
+                        </select> *@
+                        <span asp-validation-for="CategoryId" class="text-danger"></span>
+
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TagIds">Tags</label>
+                        <select asp-for="TagIds" disabled class="form-control" asp-items="@(new SelectList(Model.Tags, nameof(Tag.Id), nameof(Tag.Name)))">
+                        </select>
+
+                        <span asp-validation-for="TagIds" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ColorIds">Colors</label>
+                        <select asp-for="ColorIds" disabled class="form-control" asp-items="@(new SelectList(Model.Colors, nameof(Color.Id), nameof(Color.Name)))">
+                        </select>
+
+                        <span asp-validation-for="ColorIds" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SizeIds">Sizes</label>
+                        <select asp-for="SizeIds" disabled class="form-control" asp-items="@(new SelectList(Model.Sizes, nameof(Size.Id), nameof(Size.Name)))">
+                        </select>
+
+                        <span asp-validation-for="SizeIds" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description">Description</label>
+                        <textarea asp-for="Description" disabled class="form-control" rows="4"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary me-2">Submit</button>
+                    <button class="btn btn-light">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

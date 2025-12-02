@@ -1,5 +1,9 @@
 ﻿
 @model UpdateProductVM
+@{
+    ProductImage primary = Model.ProductImages.FirstOrDefault(pi => pi.IsPrimary == true);
+    ProductImage secondary = Model.ProductImages.FirstOrDefault(pi => pi.IsPrimary == false);
+}
 
 
 <div class="row">
@@ -9,6 +13,20 @@
                 <h4 class="card-title">Update Product</h4>
            
                 <form class="forms-sample" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <img style="width:150px;height:150px;" src="~/assets/images/website-images/@primary.Image" />
+                        <br />
+                        <label asp-for="PrimaryPhoto">Primary Image</label>
+                        <input asp-for="PrimaryPhoto" accept="image/*" class="form-control" placeholder="Photo">
+                        <span asp-validation-for="PrimaryPhoto" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <img style="width:150px;height:150px;" src="~/assets/images/website-images/@secondary.Image" />
+                        <br />
+                        <label asp-for="SecondaryPhoto">Secondary Image</label>
+                        <input asp-for="SecondaryPhoto" accept="image/*" class="form-control" placeholder="Photo">
+                        <span asp-validation-for="SecondaryPhoto" class="text-danger"></span>
+                    </div>
                     <div class="form-group">
                         <label asp-for="Name">Name</label>
                         <input asp-for="Name" class="form-control" placeholder="Name">

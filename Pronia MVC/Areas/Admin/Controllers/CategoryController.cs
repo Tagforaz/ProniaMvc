@@ -15,29 +15,29 @@ namespace Pronia_MVC.Areas.Admin.Controllers
         public CategoryController(AppDbContext context)
         {
             _context = context;
-           
-            
+
+
         }
-        public  async Task<IActionResult> Index()
+        public async Task<IActionResult> Index()
         {
-            var categoriesVMs = await _context.Categories.Include(c=>c.Products).Select(c => new GetCategoryVM
+            var categoriesVMs = await _context.Categories.Include(c => c.Products).Select(c => new GetCategoryVM
             {
                 Id = c.Id,
                 Name = c.Name,
                 Products = c.Products.ToList()
             }).ToListAsync();
             return View(categoriesVMs);
-  
+
 
         }
         public IActionResult Create()
         {
             CreateCategoryVM categoryVM = new()
             {
-           
+
             };
             return View(categoryVM);
-       
+
         }
         [HttpPost]
         public async Task<IActionResult> Create(CreateCategoryVM categoryVM)
@@ -57,7 +57,7 @@ namespace Pronia_MVC.Areas.Admin.Controllers
                 Name = categoryVM.Name,
                 CreatedAt = DateTime.Now
             };
-           
+
 
             _context.Add(category);
             await _context.SaveChangesAsync();
@@ -79,7 +79,7 @@ namespace Pronia_MVC.Areas.Admin.Controllers
                 Name = existed.Name,
             };
             return View(categoryVM);
-          
+
         }
         [HttpPost]
         public async Task<IActionResult> Update(int? id, UpdateCategoryVM categoryVM)
@@ -106,9 +106,34 @@ namespace Pronia_MVC.Areas.Admin.Controllers
             }
 
             existed.Name = categoryVM.Name;
-       
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id is null || id < 1)
+            {
+                return BadRequest();
+            }
+            Category? existedCategory = await _context.Categories.FirstOrDefaultAsync(c => c.Id == id);
+            if (existedCategory is null)
+            {
+                return NotFound();
+            }
+            GetCategoryVM categoryVM = new()
+            {
+                Id = existedCategory.Id,
+                Name = existedCategory.Name,
+                Products = existedCategory.Products
+
+            };
+            return View(categoryVM);
+
+        }
     }
 }
+   
+    
