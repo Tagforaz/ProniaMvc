@@ -347,6 +347,21 @@ namespace Pronia_MVC.Areas.Admin.Controllers
                     CreatedAt = DateTime.Now
                 });
             }
+            if(productVM.ImageIds is null)
+            {
+                productVM.ImageIds = new();
+            }
+            List<ProductImage> deletedImages = existed.ProductImages
+                .Where(pi => !productVM.ImageIds
+                .Exists(imgId => pi.Id == imgId) && pi.IsPrimary==null)
+                .ToList();
+            deletedImages
+                .ForEach(di => di.Image
+            .DeleteFile(_env.WebRootPath, "assets", "images", "website-images"));
+
+            _context.ProductImages
+                .RemoveRange(deletedImages);
+
             _context.ProductTags
                 .RemoveRange(existed.ProductTags
                 .Where(pt => !productVM.TagIds
@@ -382,11 +397,49 @@ namespace Pronia_MVC.Areas.Admin.Controllers
                     .Where(cId => !existed.ProductColors
                     .Any(pc => pc.ColorId == cId))
                     .Select(cId => new ProductColor { ColorId = cId, ProductId = existed.Id }));
+            if (productVM.AdditionalPhotos is not null)
+            {
+                string message = string.Empty;
+                foreach (IFormFile file in productVM.AdditionalPhotos)
+                {
+                    if (!file.ValidateType("image/"))
+                    {
+
+                        message += $"<p class=\"text-warning\">{file.FileName} file type is incorrect</p>";
+                        continue;
+                    }
+                    if (!file.ValidateSize(FileSize.MB, 1))
+                    {
+                        message += $"<p class=\"text-warning\">{file.FileName} file size is incorrect</p>"; ;
+                        continue;
+                    }
+
+                    existed.ProductImages.Add(new ProductImage()
+                    {
+                        Image = await file.CreateFileAsync(_env.WebRootPath, "assets", "images", "website-images"),
+                        IsPrimary = null,
+                        CreatedAt = DateTime.Now
+                    }
+                    );
+                }
+                TempData["ImageWarning"] = message;
+            }
+
             existed.Name = productVM.Name;
             existed.Sku = productVM.Sku;
             existed.Description = productVM.Description;
             existed.Price= productVM.Price.Value;
             existed.CategoryId=productVM.CategoryId.Value;
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id is null || id < 1) return BadRequest();
+            Product product = await _context.Products.Include(p=>p.ProductImages).FirstOrDefaultAsync(p => p.Id == id);
+            if(product is null) return NotFound();
+            product.ProductImages.ForEach(pi => pi.Image.DeleteFile(_env.WebRootPath, "assets", "images", "website-images"));
+            _context.Products.Remove(product);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

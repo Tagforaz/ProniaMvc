@@ -27,6 +27,21 @@
                         <input asp-for="SecondaryPhoto" accept="image/*" class="form-control" placeholder="Photo">
                         <span asp-validation-for="SecondaryPhoto" class="text-danger"></span>
                     </div>
+                    <div class="form-group d-flex">
+                        @foreach(ProductImage pImage  in Model.ProductImages.Where(pi => pi.IsPrimary == null))
+                        {
+                            <div style="position:relative">
+                                <img style="width:150px;height:150px;"src="~/assets/images/website-images/@pImage.Image" />
+                                <button type="button" style="position:absolute;top:3px;right:3px;border-radius:20px;"class="btn btn-danger cus-delete">X</button>
+                                <input asp-for="ImageIds" type="hidden" value="@pImage.Id">
+                            </div>
+                        }
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="AdditionalPhotos">Additional Image</label>
+                        <input asp-for="AdditionalPhotos" accept="image/*" class="form-control" placeholder="Photo">
+                        <span asp-validation-for="AdditionalPhotos" class="text-danger"></span>
+                    </div>
                     <div class="form-group">
                         <label asp-for="Name">Name</label>
                         <input asp-for="Name" class="form-control" placeholder="Name">
@@ -91,3 +106,16 @@
         </div>
     </div>
 </div>
+
+
+@section DeleteButtons{
+
+    <script>
+        var btns=document.querySelectorAll(".cus-delete");
+        for (let i=0; i<btns.length;i++){
+            btns[i].addEventListener("click",function (){
+                btns[i].parentElement.remove()
+            })
+        }
+    </script>
+}
