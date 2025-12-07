@@ -1,14 +1,18 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Pronia_MVC.Models;
 
 namespace Pronia_MVC.DAL
 {
-    public class AppDbContext:DbContext
+    public class AppDbContext:IdentityDbContext<AppUser>
     {
+        
         public AppDbContext(DbContextOptions<AppDbContext> option):base(option)
         {}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+           
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<ProductTag>().HasKey(pt => new { pt.ProductId, pt.TagId });
             modelBuilder.Entity<ProductColor>().HasKey(pt => new { pt.ProductId,pt.ColorId });

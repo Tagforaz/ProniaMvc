@@ -49,7 +49,7 @@ namespace Pronia_MVC.Areas.Admin.Controllers
                 ModelState.AddModelError(nameof(CreateSlideVM.Photo), "File type is incorrect");
                 return View();
             }
-            if (slideVM.Photo.ValidateSize(Utilities.Enums.FileSize.KB,2))
+            if (!slideVM.Photo.ValidateSize(Utilities.Enums.FileSize.KB,2))
             {
                 ModelState.AddModelError(nameof(CreateSlideVM.Photo), "File size is incorrect");
                 return View();
