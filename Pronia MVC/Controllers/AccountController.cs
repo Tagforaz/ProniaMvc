@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 using Pronia_MVC.Models;
 using Pronia_MVC.Utilities.Extensions;
@@ -19,12 +21,13 @@ namespace Pronia_MVC.Controllers
             _signInManager = signInManager;
             _env = env;
         }
+
         public IActionResult Register()
         {
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterVM userVM)
+        public async Task<IActionResult> Register(RegisterVM userVM, string? returnUrl)
         {
             if(!ModelState.IsValid)
             {
@@ -37,7 +40,7 @@ namespace Pronia_MVC.Controllers
                     ModelState.AddModelError(nameof(CreateSlideVM.Photo), "File type is incorrect");
                     return View();
                 }
-                if (!userVM.Photo.ValidateSize(Utilities.Enums.FileSize.KB, 2))
+                if (!userVM.Photo.ValidateSize(Utilities.Enums.FileSize.MB, 2))
                 {
                     ModelState.AddModelError(nameof(CreateSlideVM.Photo), "File size is incorrect");
                     return View();
@@ -97,8 +100,81 @@ namespace Pronia_MVC.Controllers
                 }
                 return View();
             }
-            await _signInManager.SignInAsync(user, false); 
+            await _signInManager.SignInAsync(user, false);
+            if (returnUrl is not null)
+            {
+                return Redirect(returnUrl);
+            }
             return RedirectToAction("Index", "Home");
+        }
+        public IActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginVM userVM,string? returnUrl)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            AppUser user = await _userManager.Users
+                .FirstOrDefaultAsync(u => u.UserName == userVM.UserNameOrEmail || u.Email == userVM.UserNameOrEmail);
+            if (user is null)
+            {
+                ModelState.AddModelError(string.Empty, "Username,Email or Password is incorrect");
+                return View();
+            }
+            var result= await _signInManager.PasswordSignInAsync(user, userVM.Password, userVM.IsPersistant, true);
+            if (!result.IsLockedOut)
+            {
+                ModelState.AddModelError(string.Empty, "Your account is blocked please try later");
+                return View();
+            }
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError(string.Empty, "Username,Email or Password is incorrect");
+                return View();
+            }
+            user.LockoutEnd = null;
+            if(returnUrl is not  null)
+            {
+                return Redirect(returnUrl);
+            }
+
+            return RedirectToAction("Index", "Home");
+
+        }
+        //[Authorize]
+        public async Task<IActionResult> LogOut(string? returnUrl)
+        {
+           await _signInManager.SignOutAsync();
+            if (returnUrl is not null)
+            {
+                return Redirect(returnUrl);
+            }
+            return RedirectToAction("Index", "Home");
+        }
+        [Authorize]
+        public async Task<IActionResult> Profile()
+        {
+            AppUser? user = await _userManager.GetUserAsync(User);
+            if (user is null)
+            {
+                return NotFound();
+            }
+            ProfileDetailsVM profileDetailsVM = new()
+            {
+                UserName = user.UserName,
+                Name =user.Name,
+                Surname=user.Surname,
+                Birthday=user.Birthday,
+                Image=user.Image,
+                Gender=user.Gender,
+                PhoneNumber=user.PhoneNumber,
+                Email=user.Email
+            };
+            return View(profileDetailsVM);
         }
     }
 }

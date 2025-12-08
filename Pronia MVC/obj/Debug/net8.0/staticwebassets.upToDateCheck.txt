@@ -231,6 +231,7 @@ wwwroot\assets\images\website-images\1-9-270x300.jpg
 wwwroot\assets\images\website-images\1.png
 wwwroot\assets\images\website-images\12d82949-e18d-4d3f-b146-5b78d19d985a.jpg
 wwwroot\assets\images\website-images\13f3d866-a2b2-4d68-a8f0-47e3e848301b.jpg
+wwwroot\assets\images\website-images\1f037ffd-141d-49aa-a149-d3973030b1cd.JPEG
 wwwroot\assets\images\website-images\2-1-370x270.webp
 wwwroot\assets\images\website-images\2-1-70x78.png
 wwwroot\assets\images\website-images\2-2-370x270.webp
@@ -238,6 +239,7 @@ wwwroot\assets\images\website-images\2-2-70x78.png
 wwwroot\assets\images\website-images\2-3-70x78.png
 wwwroot\assets\images\website-images\2.png
 wwwroot\assets\images\website-images\3.png
+wwwroot\assets\images\website-images\391f26c1-d02f-4df8-8935-d01278eda3d0.JPEG
 wwwroot\assets\images\website-images\63063e3c-3cfc-4c1f-9974-e3b7182458b2.png
 wwwroot\assets\images\website-images\6bb7d24b-8fb9-4a59-8823-bc23ddae07d5.jpg
 wwwroot\assets\images\website-images\6f0b2062-ac4b-4b2b-9a2b-b08c3d58af24.png
@@ -249,12 +251,15 @@ wwwroot\assets\images\website-images\car.png
 wwwroot\assets\images\website-images\card.png
 wwwroot\assets\images\website-images\cb94167f-51fc-408a-938a-a0e7376fd40a.jpg
 wwwroot\assets\images\website-images\cffe63ec-8542-4622-99db-2184f6610d28.png
+wwwroot\assets\images\website-images\da7688eb-01f0-487c-b538-50d8202b5297.JPEG
 wwwroot\assets\images\website-images\dark.png
 wwwroot\assets\images\website-images\dd2aa0ef-7e4e-4d56-9cd2-1cd21c91b6a9.png
 wwwroot\assets\images\website-images\e5c76971-c143-4389-bb23-e14b1662dac4.JPEG
 wwwroot\assets\images\website-images\eefc4a6f-a930-4bcf-85eb-ced95875ca9c.jpg
 wwwroot\assets\images\website-images\flower.jpg
 wwwroot\assets\images\website-images\nargis.jpg
+wwwroot\assets\images\website-images\pfavatar.jpg
+wwwroot\assets\images\website-images\ppavatar.png
 wwwroot\assets\images\website-images\quotation.png
 wwwroot\assets\images\website-images\rose.jpg
 wwwroot\assets\images\website-images\service.png

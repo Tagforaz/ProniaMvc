@@ -131,16 +131,16 @@
                                                         <a class="dropdown-item" asp-controller="account" asp-action="myaccount">@User.Identity.Name</a>
                                                     </li>
                                                     <li>
-                                                        <a class="dropdown-item" asp-controller="account" asp-action="logout">Log Out</a>
+                                                        <a class="dropdown-item" asp-controller="account" asp-action="logout" asp-route-returnurl="@Context.Request.Path">Log Out</a>
                                                     </li>
                                                 }
                                                 else
                                                 {
                                                     <li>
-                                                        <a class="dropdown-item" asp-controller="account" asp-action="login">Login</a>
+                                                        <a class="dropdown-item" asp-controller="account" asp-action="login" asp-route-returnurl="@Context.Request.Path">Login</a>
                                                     </li>
                                                     <li>
-                                                        <a class="dropdown-item" asp-controller="account" asp-action="register">Register</a>
+                                                        <a class="dropdown-item" asp-controller="account" asp-action="register" asp-route-returnurl="@Context.Request.Path">Register</a>
                                                     </li>
                                                 }
                                             </ul>
@@ -245,16 +245,16 @@
                                                                 <a  asp-controller="account" asp-action="myaccount">@User.Identity.Name</a>
                                                             </li>
                                                             <li>
-                                                                <a asp-controller="account" asp-action="logout">Log Out</a>
+                                                                <a asp-controller="account" asp-action="logout" asp-route-returnurl="@Context.Request.Path">Log Out</a>
                                                             </li>
                                                         }
                                                         else
                                                         {
                                                             <li>
-                                                                <a  asp-controller="account" asp-action="login">Login</a>
+                                                                <a asp-controller="account" asp-action="login" asp-route-returnurl="@Context.Request.Path">Login</a>
                                                             </li>
                                                             <li>
-                                                                <a asp-controller="account" asp-action="register">Register</a>
+                                                                <a asp-controller="account" asp-action="register" asp-route-returnurl="@Context.Request.Path">Register</a>
                                                             </li>
                                                         }
                                                         <li>
@@ -390,16 +390,16 @@
                                                                     <a  asp-controller="account" asp-action="myaccount">@User.Identity.Name</a>
                                                                 </li>
                                                                 <li>
-                                                                    <a  asp-controller="account" asp-action="logout">Log Out</a>
+                                                                    <a asp-controller="account" asp-action="logout" asp-route-returnurl="@Context.Request.Path">Log Out</a>
                                                                 </li>
                                                             }
                                                             else
                                                             {
                                                                 <li>
-                                                                    <a  asp-controller="account" asp-action="login">Login</a>
+                                                                    <a asp-controller="account" asp-action="login" asp-route-returnurl="@Context.Request.Path">Login</a>
                                                                 </li>
                                                                 <li>
-                                                                    <a  asp-controller="account" asp-action="register">Register</a>
+                                                                    <a asp-controller="account" asp-action="register" asp-route-returnurl="@Context.Request.Path">Register</a>
                                                                 </li>
                                                             }
                                                             <li>
@@ -478,16 +478,16 @@
                                                         <a class="dropdown-item" asp-controller="account" asp-action="myaccount">@User.Identity.Name</a>
                                                     </li>
                                                     <li>
-                                                        <a class="dropdown-item" asp-controller="account" asp-action="logout" >Log Out</a>
+                                                        <a class="dropdown-item" asp-controller="account" asp-action="logout" asp-route-returnurl="@Context.Request.Path">Log Out</a>
                                                     </li>
                                                 }
                                                 else
                                                 {
                                                     <li>
-                                                        <a class="dropdown-item" asp-controller="account" asp-action="login">Login</a>
+                                                        <a class="dropdown-item" asp-controller="account" asp-action="login" asp-route-returnurl="@Context.Request.Path">Login</a>
                                                     </li>
                                                     <li>
-                                                        <a class="dropdown-item" asp-controller="account" asp-action="register">Register</a>
+                                                        <a class="dropdown-item" asp-controller="account" asp-action="register" asp-route-returnurl="@Context.Request.Path">Register</a>
                                                     </li>
                                                 }
                                               
@@ -574,16 +574,16 @@
                                                 <a class="dropdown-item" asp-controller="account" asp-action="myaccount">@User.Identity.Name</a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item" asp-controller="account" asp-action="logout">Log Out</a>
+                                                <a class="dropdown-item" asp-controller="account" asp-action="logout" asp-route-returnurl="@Context.Request.Path">Log Out</a>
                                             </li>
                                         }
                                         else
                                         {
                                             <li>
-                                                <a class="dropdown-item" asp-controller="account" asp-action="login">Login</a>
+                                                <a class="dropdown-item" asp-controller="account" asp-action="login" asp-route-returnurl="@Context.Request.Path">Login</a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item" asp-controller="account" asp-action="register">Register</a>
+                                                <a class="dropdown-item" asp-controller="account" asp-action="register" asp-route-returnurl="@Context.Request.Path">Register</a>
                                             </li>
                                         }
                                     </ul>
@@ -720,16 +720,16 @@
                                                             <a  asp-controller="account" asp-action="myaccount">@User.Identity.Name</a>
                                                         </li>
                                                         <li>
-                                                            <a  asp-controller="account" asp-action="logout">Log Out</a>
+                                                            <a asp-controller="account" asp-action="logout" asp-route-returnurl="@Context.Request.Path">Log Out</a>
                                                         </li>
                                                     }
                                                     else
                                                     {
                                                         <li>
-                                                            <a  asp-controller="account" asp-action="login">Login</a>
+                                                            <a asp-controller="account" asp-action="login" asp-route-returnurl="@Context.Request.Path">Login</a>
                                                         </li>
                                                         <li>
-                                                            <a  asp-controller="account" asp-action="register">Register</a>
+                                                            <a asp-controller="account" asp-action="register" asp-route-returnurl="@Context.Request.Path">Register</a>
                                                         </li>
                                                     }
                                                     <li>
