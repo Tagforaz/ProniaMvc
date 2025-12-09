@@ -107,5 +107,40 @@ namespace Pronia_MVC.Areas.Admin.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id is null | id < 1)
+            {
+                return BadRequest();
+            }
+            Size? size = await _context.Sizes.FirstOrDefaultAsync(s => s.Id == id);
+            if (size is null)
+            {
+                return NotFound();
+            }
+            _context.Sizes.Remove(size);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id is null || id < 1)
+            {
+                return BadRequest();
+            }
+            Size? existedSize = await _context.Sizes.FirstOrDefaultAsync(s => s.Id == id);
+
+            if (existedSize is null)
+            {
+                return NotFound();
+            }
+
+            DetailsSizeVM sizeVM = new()
+            {
+                Name = existedSize.Name
+            };
+
+            return View(sizeVM);
+        }
     }
 }

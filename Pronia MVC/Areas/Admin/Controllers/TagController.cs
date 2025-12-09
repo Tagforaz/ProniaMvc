@@ -103,5 +103,42 @@ namespace Pronia_MVC.Areas.Admin.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id is null | id < 1)
+            {
+                return BadRequest();
+            }
+            Tag? tag = await _context.Tags.FirstOrDefaultAsync(t => t.Id == id);
+            if (tag is null)
+            {
+                return NotFound();
+            }
+            _context.Tags.Remove(tag);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id is null || id < 1)
+            {
+                return BadRequest();
+            }
+
+            Tag? existedTag = await _context.Tags.FirstOrDefaultAsync(t => t.Id == id);
+
+            if (existedTag is null)
+            {
+                return NotFound();
+            }
+
+            DetailsTagVM tagVM = new()
+            {
+                Name = existedTag.Name
+            };
+
+            return View(tagVM);
+        }
     }
+
 }

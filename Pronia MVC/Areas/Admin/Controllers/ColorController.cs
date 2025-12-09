@@ -107,5 +107,41 @@ namespace Pronia_MVC.Areas.Admin.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id is null | id < 1)
+            {
+                return BadRequest();
+            }
+            Color? color = await _context.Colors.FirstOrDefaultAsync(c => c.Id == id);
+            if (color is null)
+            {
+                return NotFound();
+            }
+            _context.Colors.Remove(color);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id is null || id < 1)
+            {
+                return BadRequest();
+            }
+
+            Color? existedColor = await _context.Colors.FirstOrDefaultAsync(c => c.Id == id);
+
+            if (existedColor is null)
+            {
+                return NotFound();
+            }
+
+             DetailsColorVM colorVM = new()
+            {
+                Name = existedColor.Name
+            };
+
+            return View(colorVM);
+        }
     }
 }

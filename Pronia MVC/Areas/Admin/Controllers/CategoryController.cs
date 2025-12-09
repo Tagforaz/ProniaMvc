@@ -118,7 +118,7 @@ namespace Pronia_MVC.Areas.Admin.Controllers
             {
                 return BadRequest();
             }
-            Category? existedCategory = await _context.Categories.FirstOrDefaultAsync(c => c.Id == id);
+            Category? existedCategory = await _context.Categories.Include(c=>c.Products).ThenInclude(p=>p.ProductImages).FirstOrDefaultAsync(c => c.Id == id);
             if (existedCategory is null)
             {
                 return NotFound();
@@ -132,6 +132,21 @@ namespace Pronia_MVC.Areas.Admin.Controllers
             };
             return View(categoryVM);
 
+        }
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id is null | id < 1)
+            {
+                return BadRequest();
+            }
+            Category? category = await _context.Categories.FirstOrDefaultAsync(c => c.Id == id);
+            if (category is null)
+            {
+                return NotFound();
+            }
+            _context.Categories.Remove(category);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
     }
 }

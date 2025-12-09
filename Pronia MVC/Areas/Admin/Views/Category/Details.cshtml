@@ -12,9 +12,24 @@
                         <input asp-for="Name" disabled class="form-control" placeholder="Title">
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
-
-                    <button type="submit" class="btn btn-primary me-2">Submit</button>
-                    <button class="btn btn-light">Cancel</button>
+                    <div style="display:flex; flex-wrap:wrap; column-gap:25px; row-gap:50px; margin: 50px 0; justify-content:space-evenly; ">
+                        @if (Model.Products is not null)
+                        {
+                            foreach (Product product in Model.Products.Where(p => p.CategoryId == Model.Id))
+                            {
+                                <div class="card" style="width: 18rem;">
+                                    <img src="~/assets/images/website-images/@product.ProductImages.FirstOrDefault(pi => pi.IsPrimary == true)?.Image" class="card-img-top" alt="" style="width:270px;height:270px; align-self:center;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">@product.Name</h5>
+                                        <p class="card-text">@product.Description</p>
+                                        <a asp-controller="product" asp-action="details" asp-route-id="@product.Id" class="btn btn-success">Go to product</a>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                   
+                    <a asp-action="index" class="btn btn-light">Cancel</a>
                 </form>
             </div>
         </div>
