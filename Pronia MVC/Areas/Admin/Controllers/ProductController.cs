@@ -11,7 +11,7 @@ using Pronia_MVC.ViewModels;
 namespace Pronia_MVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    //[Authorize]
+    [Authorize(Roles = "Admin,Moderator")]
     public class ProductController : Controller
     {
         private readonly AppDbContext _context;
@@ -22,6 +22,7 @@ namespace Pronia_MVC.Areas.Admin.Controllers
             _context = context;
             _env = env;
         }
+       
         public async Task<IActionResult> Index()
         {
             var productsVMs=await _context.Products
@@ -36,6 +37,7 @@ namespace Pronia_MVC.Areas.Admin.Controllers
                 }).ToListAsync();
             return View(productsVMs);
         }
+       
         public async Task<IActionResult> Create()
         {
             CreateProductVM productVM = new()
@@ -196,6 +198,7 @@ namespace Pronia_MVC.Areas.Admin.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update(int? id)
         {
             if(id is null || id < 1)
@@ -435,6 +438,7 @@ namespace Pronia_MVC.Areas.Admin.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id is null || id < 1) return BadRequest();

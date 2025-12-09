@@ -136,7 +136,7 @@ namespace Pronia_MVC.Areas.Admin.Controllers
                 return NotFound();
             }
 
-             DetailsColorVM colorVM = new()
+            DetailsColorVM colorVM = new()
             {
                 Name = existedColor.Name
             };

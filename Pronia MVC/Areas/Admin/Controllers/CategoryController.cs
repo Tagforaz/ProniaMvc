@@ -118,7 +118,7 @@ namespace Pronia_MVC.Areas.Admin.Controllers
             {
                 return BadRequest();
             }
-            Category? existedCategory = await _context.Categories.Include(c=>c.Products).ThenInclude(p=>p.ProductImages).FirstOrDefaultAsync(c => c.Id == id);
+            Category? existedCategory = await _context.Categories.Include(c => c.Products).ThenInclude(p => p.ProductImages).FirstOrDefaultAsync(c => c.Id == id);
             if (existedCategory is null)
             {
                 return NotFound();
@@ -150,5 +150,5 @@ namespace Pronia_MVC.Areas.Admin.Controllers
         }
     }
 }
-   
-    
+
+
