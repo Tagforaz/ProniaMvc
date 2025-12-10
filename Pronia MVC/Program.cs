@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Pronia_MVC.DAL;
 using Pronia_MVC.Models;
+using Pronia_MVC.Services.Implementations;
+using Pronia_MVC.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
@@ -17,6 +19,7 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(opt =>
     opt.Lockout.MaxFailedAccessAttempts = 3;
     opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2);
 }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+builder.Services.AddScoped<ILayoutService,LayoutServices>();
 var app = builder.Build();
 app.UseAuthentication();
 app.UseAuthorization();

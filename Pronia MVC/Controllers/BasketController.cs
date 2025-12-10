@@ -15,9 +15,44 @@ namespace Pronia_MVC.Controllers
         {
             _context = context;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            string json = Request.Cookies["Basket"];
+            List<BasketCookieItemVM> items;
+            BasketVM basketVM = new()
+            {
+                BasketItemVMs = new List<BasketItemVM>()
+            };
+            if (json is not null)
+
+            {
+                items = JsonConvert.DeserializeObject<List<BasketCookieItemVM>>(json);
+            }
+            else
+            {
+                items = new();
+            }
+            foreach(BasketCookieItemVM cookie in items)
+            {
+              Product? product=await  _context.Products
+                    .Include(p=>p.ProductImages.Where(pi=>pi.IsPrimary==true))
+                    .FirstOrDefaultAsync(p => cookie.ProductId == p.Id);
+                if (product is not null)
+                {
+                    basketVM.BasketItemVMs.Add(new BasketItemVM
+                    {
+                        ProductId = product.Id,
+                        Name = product.Name,
+                        Price = product.Price,
+                        Image = product.ProductImages[0].Image,
+                        Count = cookie.Count,
+                        SubTotal = cookie.Count * product.Price
+                    });
+                    basketVM.Total += cookie.Count * product.Price;
+                }
+
+            }
+            return View(basketVM);
         }
         public async Task<IActionResult> AddBasket(int? id)
         {
@@ -25,7 +60,7 @@ namespace Pronia_MVC.Controllers
             Product? product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
             if (product is null) return NotFound();
             List<BasketCookieItemVM> items;
-            if (Request.Cookies["basket"] is null)
+            if (Request.Cookies["Basket"] is null)
             {
                 items = new List<BasketCookieItemVM>();
                 items.Add(new BasketCookieItemVM
@@ -36,7 +71,7 @@ namespace Pronia_MVC.Controllers
             }
             else
             {
-                string str = Request.Cookies["basket"];
+                string str = Request.Cookies["Basket"];
                 items = JsonConvert.DeserializeObject<List<BasketCookieItemVM>>(str);
                 BasketCookieItemVM itemVM = items.FirstOrDefault(i => i.ProductId == id);
                 if (itemVM is null)
