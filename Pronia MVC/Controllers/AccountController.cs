@@ -109,6 +109,7 @@ namespace Pronia_MVC.Controllers
             }
             await _userManager.AddToRoleAsync(user, UserRole.Member.ToString());
             await _signInManager.SignInAsync(user, false);
+            Response.Cookies.Delete("Basket");
             if (returnUrl is not null)
             {
                 return Redirect(returnUrl);
@@ -145,6 +146,7 @@ namespace Pronia_MVC.Controllers
                 return View();
             }
             user.LockoutEnd = null;
+            Response.Cookies.Delete("Basket");
             if (returnUrl is not null)
             {
                 return Redirect(returnUrl);

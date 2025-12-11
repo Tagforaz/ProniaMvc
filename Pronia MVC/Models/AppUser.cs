@@ -10,6 +10,8 @@ namespace Pronia_MVC.Models
         public string Image {  get; set; }
         public DateOnly Birthday { get; set; }
         public Gender Gender { get; set; }
+        //relational
+        public List<BasketItem> BasketItems { get; set; }
 
 
     }
