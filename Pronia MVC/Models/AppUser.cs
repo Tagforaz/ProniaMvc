@@ -11,6 +11,7 @@ namespace Pronia_MVC.Models
         public DateOnly Birthday { get; set; }
         public Gender Gender { get; set; }
         //relational
+        public List<Order> Orders { get; set; }
         public List<BasketItem> BasketItems { get; set; }
 
 
